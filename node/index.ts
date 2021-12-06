@@ -1,49 +1,30 @@
-import type { ParamsContext, RecorderState, ServiceContext } from '@vtex/api'
-import { Service } from '@vtex/api'
-import { prop } from 'ramda'
+import type { RecorderState } from '@vtex/api'
+import { LRUCache, Service } from '@vtex/api'
 
 import { Clients } from './clients'
-import { book } from './resolvers/book'
-import { books } from './resolvers/books'
-import { deleteBook } from './resolvers/delete'
-import { editBook } from './resolvers/editBook'
-import { newBook } from './resolvers/newBook'
-import { source } from './resolvers/source'
-import { total } from './resolvers/total'
+import { resolvers } from './resolvers'
 
-const MEDIUM_TIMEOUT_MS = 2 * 1000
+const TIMEOUT_MS = 800
 
-declare global {
-  // We declare a global Context type just to avoid re-writing ServiceContext<Clients, State> in every handler and resolver
-  type Context = ServiceContext<Clients>
-}
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const memoryCache = new LRUCache<string, any>({ max: 20 })
 
-// Export a service that defines resolvers and clients' options
-export default new Service<Clients, RecorderState, ParamsContext>({
+metrics.trackCache('status', memoryCache)
+
+export default new Service<Clients, RecorderState, Context>({
   clients: {
     implementation: Clients,
     options: {
       default: {
-        timeout: MEDIUM_TIMEOUT_MS,
+        retries: 2,
+        timeout: TIMEOUT_MS,
+      },
+      status: {
+        memoryCache,
       },
     },
   },
   graphql: {
-    resolvers: {
-      Book: {
-        cacheId: prop('id'),
-      },
-      Mutation: {
-        delete: deleteBook,
-        editBook,
-        newBook,
-      },
-      Query: {
-        book,
-        books,
-        source,
-        total,
-      },
-    },
+    resolvers,
   },
 })

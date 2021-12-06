@@ -1,16 +1,21 @@
 {
-  "name": "graphql-example",
-  "vendor": "vtex",
-  "version": "0.2.2",
-  "title": "GraphQL Example",
-  "description": "Reference app for VTEX IO GraphQL Services",
-  "mustUpdateAt": "2022-01-04",
-  "categories": [],
+  "name": "vtex-logger-graphql",
+  "vendor": "vtexarg",
+  "version": "0.0.1",
+  "title": "Vtex Logger GraphQL",
+  "description": "Vtex Logger GraphQL",
   "dependencies": {},
   "builders": {
     "docs": "0.x",
     "graphql": "1.x",
     "node": "6.x"
+  },
+  "billingOptions": {
+    "support": {
+      "url": "https://support.vtex.com/hc/requests"
+    },
+    "type": "free",
+    "availableCountries": ["*"]
   },
   "scripts": {
     "prereleasy": "bash lint.sh"
