@@ -53,6 +53,7 @@ declare global {
   }
 
   interface MutationParamLogger {
+    app: string
     message: string
     detail: string
   }

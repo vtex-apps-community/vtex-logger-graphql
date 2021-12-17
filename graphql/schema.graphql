@@ -3,5 +3,5 @@ type Query {
 }
 
 type Mutation {
-  logger(message: String, detail: String): LoggerResponse
+  logger(app: String, message: String, detail: String): LoggerResponse
 }

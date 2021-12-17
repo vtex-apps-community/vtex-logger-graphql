@@ -3,17 +3,22 @@ import { LogLevel } from '@vtex/api'
 export const mutations = {
   logger: async (
     _: unknown,
-    { message, detail }: MutationParamLogger,
+    { app, message, detail }: MutationParamLogger,
     ctx: Context
   ) => {
-    ctx.vtex.logger.log(
-      {
-        message,
-        detail: JSON.parse(detail),
-      },
-      LogLevel.Info
-    )
+    try {
+      ctx.vtex.logger.log(
+        {
+          app,
+          message,
+          detail: JSON.parse(detail),
+        },
+        LogLevel.Info
+      )
 
-    return { status: 200 }
+      return { status: 200 }
+    } catch (_e) {
+      return { status: 400 }
+    }
   },
 }

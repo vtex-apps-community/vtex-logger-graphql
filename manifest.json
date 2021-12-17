@@ -1,6 +1,6 @@
 {
   "name": "vtex-logger-graphql",
-  "vendor": "vtexarg",
+  "vendor": "vtex",
   "version": "0.0.1",
   "title": "Vtex Logger GraphQL",
   "description": "Vtex Logger GraphQL",
@@ -9,13 +9,6 @@
     "docs": "0.x",
     "graphql": "1.x",
     "node": "6.x"
-  },
-  "billingOptions": {
-    "support": {
-      "url": "https://support.vtex.com/hc/requests"
-    },
-    "type": "free",
-    "availableCountries": ["*"]
   },
   "scripts": {
     "prereleasy": "bash lint.sh"
