@@ -1,7 +1,7 @@
 {
   "name": "vtex-logger-graphql",
   "vendor": "vtex",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "title": "Vtex Logger GraphQL",
   "description": "Vtex Logger GraphQL",
   "dependencies": {},
